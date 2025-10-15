@@ -3,32 +3,20 @@
         <title>W02: Task 03</title>
     </head>
     <body>
-        <div class="vertex-input" id="v0-input">
-            <label>v0</label>
-            <div class="coord-group">
-                x: <input type="number" id="x0" value="0">
-                y: <input type="number" id="y0" value="0">
-                z: <input type="number" id="z0" value="0">
-            </div>
-        </div>
+        <label>v0</label>
+            x: <input type="number" id="x0" value="0">
+            y: <input type="number" id="y0" value="0">
+            z: <input type="number" id="z0" value="0">
 
-        <div class="vertex-input" id="v1-input">
-            <label>v1</label>
-            <div class="coord-group">
-                x: <input type="number" id="x1" value="0">
-                y: <input type="number" id="y1" value="0">
-                z: <input type="number" id="z1" value="0">
-            </div>
-        </div>
+        <label>v1</label>
+            x: <input type="number" id="x1" value="0">
+            y: <input type="number" id="y1" value="0">
+            z: <input type="number" id="z1" value="0">
 
-        <div class="vertex-input" id="v2-input">
-            <label>v2</label>
-            <div class="coord-group">
-                x: <input type="number" id="x2" value="0">
-                y: <input type="number" id="y2" value="0">
-                z: <input type="number" id="z2" value="0">
-            </div>
-        </div>
+        <label>v2</label>
+            x: <input type="number" id="x2" value="0">
+            y: <input type="number" id="y2" value="0">
+            z: <input type="number" id="z2" value="0">
 
         <button onclick="calculateArea()">Calculate the area</button>
 
@@ -47,17 +35,17 @@
             }
 
             function calculateArea() {
-                var x0 = parseFloat(document.getElementById('x0').value) || 0
-                var y0 = parseFloat(document.getElementById('y0').value) || 0
-                var z0 = parseFloat(document.getElementById('z0').value) || 0
+                var x0 = parseFloat(document.getElementById('x0').value)
+                var y0 = parseFloat(document.getElementById('y0').value)
+                var z0 = parseFloat(document.getElementById('z0').value)
 
-                var x1 = parseFloat(document.getElementById('x1').value) || 0
-                var y1 = parseFloat(document.getElementById('y1').value) || 0
-                var z1 = parseFloat(document.getElementById('z1').value) || 0
+                var x1 = parseFloat(document.getElementById('x1').value)
+                var y1 = parseFloat(document.getElementById('y1').value)
+                var z1 = parseFloat(document.getElementById('z1').value)
 
-                var x2 = parseFloat(document.getElementById('x2').value) || 0
-                var y2 = parseFloat(document.getElementById('y2').value) || 0
-                var z2 = parseFloat(document.getElementById('z2').value) || 0
+                var x2 = parseFloat(document.getElementById('x2').value)
+                var y2 = parseFloat(document.getElementById('y2').value)
+                var z2 = parseFloat(document.getElementById('z2').value)
             
                 var v0 = new Vec3( x0, y0, z0 );
                 var v1 = new Vec3( x1, y1, z1 );
