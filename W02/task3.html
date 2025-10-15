@@ -3,17 +3,68 @@
         <title>W02: Task 03</title>
     </head>
     <body>
-        <input type="number" id="x0" value="0"/>
-        
+        <div class="vertex-input" id="v0-input">
+            <label>v0</label>
+            <div class="coord-group">
+                x: <input type="number" id="x0" value="0">
+                y: <input type="number" id="y0" value="0">
+                z: <input type="number" id="z0" value="0">
+            </div>
+        </div>
+
+        <div class="vertex-input" id="v1-input">
+            <label>v1</label>
+            <div class="coord-group">
+                x: <input type="number" id="x1" value="0">
+                y: <input type="number" id="y1" value="0">
+                z: <input type="number" id="z1" value="0">
+            </div>
+        </div>
+
+        <div class="vertex-input" id="v2-input">
+            <label>v2</label>
+            <div class="coord-group">
+                x: <input type="number" id="x2" value="0">
+                y: <input type="number" id="y2" value="0">
+                z: <input type="number" id="z2" value="0">
+            </div>
+        </div>
+
+        <button onclick="calculateArea()">Calculate the area</button>
+
+        <div id="result">
+            the area : 
+        </div>
+
         <script src="vec3.js"></script>
         <script>
-            var x0, y0, z0; // (input vertax 0)
-            var x1, y1, z1; // (input vertax 1)
-            var x2, y2, z2; // (input vertax 2)
+            function AreaOfTriangle( v0, v1, v2 ) {
+                var A = new Vec3( v1.x, v1.y, v1.z ).sub( v0 ); // 辺ベクトル A：v1 - v0
+                var B = new Vec3( v2.x, v2.y, v2.z ).sub( v0 ); // 辺ベクトル B：v2 - v0
+                var cross = A.cross( B ); // 外積 A × B
+                var magnitude = cross.length(); // 外積ベクトルの大きさ
+                return magnitude / 2; // 面積 S = | A × B | / 2
+            }
+
+            var x0 = parseFloat(document.getElementryById('x0').value)
+            var y0 = parseFloat(document.getElementryById('y0').value)
+            var z0 = parseFloat(document.getElementryById('z0').value)
+
+            var x1 = parseFloat(document.getElementryById('x1').value)
+            var y1 = parseFloat(document.getElementryById('y1').value)
+            var z1 = parseFloat(document.getElementryById('z1').value)
+
+            var x2 = parseFloat(document.getElementryById('x2').value)
+            var y2 = parseFloat(document.getElementryById('y2').value)
+            var z2 = parseFloat(document.getElementryById('z2').value)
+        
             var v0 = new Vec3( x0, y0, z0 );
             var v1 = new Vec3( x1, y1, z1 );
             var v2 = new Vec3( x2, y2, z2 );
             var S = AreaOfTriangle( v0, v1, v2 ); // (output value)
+
+            document.getElementryById('result').innerHTML = "面積 S : " + S;
         </script>
     </body>
 </html>
+
