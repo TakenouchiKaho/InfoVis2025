@@ -47,26 +47,26 @@
             }
 
             function calculateArea() {
-                var x0 = parseFloat(document.getElementryById('x0').value)
-                var y0 = parseFloat(document.getElementryById('y0').value)
-                var z0 = parseFloat(document.getElementryById('z0').value)
+                var x0 = parseFloat(document.getElementById('x0').value)
+                var y0 = parseFloat(document.getElementById('y0').value)
+                var z0 = parseFloat(document.getElementById('z0').value)
 
-                var x1 = parseFloat(document.getElementryById('x1').value)
-                var y1 = parseFloat(document.getElementryById('y1').value)
-                var z1 = parseFloat(document.getElementryById('z1').value)
+                var x1 = parseFloat(document.getElementById('x1').value)
+                var y1 = parseFloat(document.getElementById('y1').value)
+                var z1 = parseFloat(document.getElementById('z1').value)
 
-                var x2 = parseFloat(document.getElementryById('x2').value)
-                var y2 = parseFloat(document.getElementryById('y2').value)
-                var z2 = parseFloat(document.getElementryById('z2').value)
+                var x2 = parseFloat(document.getElementById('x2').value)
+                var y2 = parseFloat(document.getElementById('y2').value)
+                var z2 = parseFloat(document.getElementById('z2').value)
             
                 var v0 = new Vec3( x0, y0, z0 );
                 var v1 = new Vec3( x1, y1, z1 );
                 var v2 = new Vec3( x2, y2, z2 );
                 var S = AreaOfTriangle( v0, v1, v2 ); // (output value)
 
-                document.getElementryById('result').innerHTML = "面積 S : " + S;
+                document.getElementById('result').innerHTML = "面積 S : " + S;
             }
-            window.onload = calculateArea;
+            calculateArea;
         </script>
     </body>
 </html>
