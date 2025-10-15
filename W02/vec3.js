@@ -55,7 +55,7 @@ class Vec3{
     }
 
     // Cross method
-    cross()
+    cross( v )
     {
         var x = this.x, y = this.y, z = this.z;
         this.x = y * v.z - z * v.y;
