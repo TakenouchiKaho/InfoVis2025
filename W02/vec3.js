@@ -20,10 +20,7 @@ class Vec3{
     // Sub method
     sub( v )
     {
-        this.x -= v.x;
-        this.y -= v.y;
-        this.z -= v.z;
-        return this;
+        return new Vec3(this.x - v.x, this.y - v.y, this.z - v.z);
     }
 
     // Sum method
@@ -58,10 +55,10 @@ class Vec3{
     cross( v )
     {
         var x = this.x, y = this.y, z = this.z;
-        this.x = y * v.z - z * v.y;
-        this.y = z * v.x - x * v.z;
-        this.z = x * v.y - y * v.x;
-        return this;
+        var nx = y * v.z - z * v.y;
+        var ny = z * v.x - x * v.z;
+        var nz = x * v.y - y * v.x;
+        return new Vec3(nx, ny, nz);
     }
 
     // Length method
