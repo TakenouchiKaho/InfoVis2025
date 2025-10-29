@@ -5,15 +5,15 @@
     <body>
         <script src="https://d3js.org/d3.v4.min.js"></script>
         <script>
-            var data = [100, 50, 80];
-            var padding = 10;
-            var height = 20;
-            var svg = d3.select("body").append("svg");
+            var data = [100, 50, 80];   // 描画する長方形の幅
+            var padding = 10;   // 各要素間のパディング
+            var height = 20;    // 描画される長方形の高さ
+            var svg = d3.select("body").append("svg");  // HTMLの<body>要素内に、描画領域となる,<svg>要素を新しく追加し、それを変数svgに格納
 
-            svg.selectAll("rect").data(data).enter().append("rect")
+            svg.selectAll("rect").data(data).enter().append("rect") // dataに応じて、新しい<rect>要素を3つ、<svg>内に追加
                 .attr("x", padding)
-                .attr("y", function(d, i){ return padding + i * (height + padding); })
-                .attr("width", function(d){ return d; })
+                .attr("y", function(d, i){ return padding + i * (height + padding); })  // i：dataのインデックス(0,1,2)
+                .attr("width", function(d){ return d; })    // データ値dをそのまま長方形の幅として設定
                 .attr("height", height);
         </script>
     </body>
