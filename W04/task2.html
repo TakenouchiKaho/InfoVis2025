@@ -7,7 +7,7 @@
         <script>
             var padding = 10;
             var height = 20;
-            var label_width = 50;
+            var label_width = 80;
             var svg = d3.select("body").append("svg");
             d3.csv("https://TakenouchiKaho.github.io/InfoVis2025/W04/w04_task2.csv", draw);  // 関数に名前(draw)がある
             function draw(data){
@@ -26,7 +26,7 @@
                     .append("text")
                     .attr("class", "bar-label")
                     .attr("x", padding)
-                    .attr("y", function(d, i){ return padding + i * (height + padding) + height / 2; })
+                    .attr("y", function(d, i){ return padding + i * (height + padding) + height; })
                     .text(function(d){ return d.label; })
             };
         </script>
