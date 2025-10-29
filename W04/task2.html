@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <title>W04: Task 02</title>
+    </head>
+    <body>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <script>
+            var padding = 10;
+            var height = 20;
+            var label_width = 50;
+            var svg = d3.select("body").append("svg");
+            d3.csv("https://TakenouchiKaho.github.io/InfoVis2025/W04/w04_task2.csv", draw);  // 関数に名前(draw)がある
+            function draw(data){
+                svg.selectAll("rect")
+                    .data(data)
+                    .enter()
+                    .append("rect")
+                    .attr("x", padding + label_width)
+                    .attr("y", function(d, i){ return padding + i * (height + padding); })
+                    .attr("width", function(d){ return d.width; })
+                    .attr("height", height);
+
+                svg.selectAll(".bar-label")
+                    .data(data)
+                    .enter()
+                    .append("text")
+                    .attr("class", "bar-label")
+                    .attr("x", padding)
+                    .attr("y", function(d, i){ return padding + i * (height + padding) + height / 2; })
+                    .text(function(d){ return d.label; })
+            };
+        </script>
+    </body>
+</html>
