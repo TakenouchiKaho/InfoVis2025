@@ -6,7 +6,7 @@
         <script src="https://d3js.org/d3.v4.min.js"></script>
         <script>
             var svg = d3.select("body").append("svg");
-            d3.csv("https://TakenouchiKaho.github.io/InfoVis2025/W04/data.csv",
+            d3.csv("https://TakenouchiKaho.github.io/InfoVis2025/W04/data.csv", // 関数に名前がない
                 function(data){
                     svg.selectAll("circle")
                         .data(data)
