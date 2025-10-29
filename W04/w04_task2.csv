@@ -1,4 +1,5 @@
-label,width
-Label 1,100
-Label 2,50
-Label 3,80
+label,width,color
+Label 1,100,red
+Label 2,50,blue
+Label 3,80,green
+Label 4,40,yellow
