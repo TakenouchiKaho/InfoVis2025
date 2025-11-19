@@ -10,7 +10,7 @@ d3.csv("https://TakenouchiKaho.github.io/InfoVis2025/W04/data.csv")
             margin: {top:10, right:10, bottom:20, left:10} };
 
         const scatter_plot = new ScatterPlot( config, data );
-        scatter_plot.updata();
+        scatter_plot.update();
     })
     .catch( error => {
         console.log( error );
@@ -46,13 +46,13 @@ class ScatterPlot {
         self.xscale = d3.scaleLinear()
             .range( [0, self.inner_width] );
 
-            self.yscale = d3.scaleLinear()
+        self.yscale = d3.scaleLinear()
             .range( [0, self.inner_height] );
 
         self.xaxis = d3.axisBottom( self.xscale )
             .ticks(6);
 
-        self.xaxis_group = self.chart/append('g')
+        self.xaxis_group = self.chart.append('g')
             .attr('transform', `translate(0, ${self.inner_height})`);
     }
 

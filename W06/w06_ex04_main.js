@@ -12,7 +12,7 @@ function ShowScatterPlot( data ) {
     const width = 256;
     const height = 256;
     // Margins
-    const margin = {top: 10, right: 10, bottom: 10, left: 10};
+    const margin = {top: 10, right: 10, bottom: 20, left: 10};
     // 'svg' and 'g' elements
     var svg = d3.select("body").append("svg")
         .attr('width', width)
