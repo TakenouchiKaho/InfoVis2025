@@ -7,7 +7,7 @@ d3.csv("https://TakenouchiKaho.github.io/InfoVis2025/W04/w04_task1.csv")
             parent: '#drawing_region',
             width: 256,
             height: 256,
-            margin: {top:10, right:10, bottom:20, left:20} };
+            margin: {top:10, right:10, bottom:20, left:50} };
 
         const scatter_plot = new ScatterPlot( config, data );
         scatter_plot.update();
