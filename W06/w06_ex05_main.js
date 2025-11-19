@@ -47,7 +47,7 @@ class ScatterPlot {
             .range( [0, self.inner_width] );
 
         self.yscale = d3.scaleLinear()
-            .range( [0, 0] );
+            .range( [0, self.inner_height] );
 
         self.xaxis = d3.axisBottom( self.xscale )
             .ticks(6);
@@ -78,7 +78,7 @@ class ScatterPlot {
             .enter()
             .append("circle")
             .attr("cx", d => self.xscale( d.x ))
-            .attr("cy", d => self.xscale( d.y ))
+            .attr("cy", d => self.yscale( d.y ))
             .attr("r", d => d.r );
 
         self.xaxis_group
