@@ -56,7 +56,7 @@ class PieChart {
     update() {
         let self = this;
 
-        const pie_data = self.pie(self.data);
+        self.pie_data = self.pie(self.data);
 
         self.render();
     }
