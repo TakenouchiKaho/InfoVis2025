@@ -1,4 +1,4 @@
-d3.csv("https://TakenouchiKaho.github.io/InfoVis2025/W04/w04_task2.csv")
+d3.csv("https://TakenouchiKaho.github.io/InfoVis2025/W08/w08_task1.csv")
     .then( data => {
         // Convert strings to numbers
         data.forEach( d => { d.value = +d.width || +d.x; });
