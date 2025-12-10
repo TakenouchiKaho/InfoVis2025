@@ -31,7 +31,7 @@ class LineChart {
     init() {
         let self = this;
         
-        self.config.margin = self.config.margin || {top: 10, right: 10, bottom: 20, left: 60};
+        self.config.margin = self.config.margin || {top: 10, right: 10, bottom: 30, left: 60};
 
         self.svg = d3.select( self.config.parent )
             .append('svg')
