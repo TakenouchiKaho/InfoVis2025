@@ -88,6 +88,9 @@ class LineChart {
         self.path
             .attr('d', self.line(self.data));
 
+        // デバッグ用: パスデータが正しく生成されているかコンソールに出力
+        console.log("Path Data:", self.line(self.data));
+
         self.xaxis_group.call( self.xaxis );
         self.yaxis_group.call( self.yaxis );
     }
