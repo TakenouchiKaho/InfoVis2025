@@ -39,7 +39,7 @@ class PieChart {
             .attr('height', self.config.height)
 
         self.chart = self.svg.append('g')
-            .attr('transform', `translate(${self.config.width/2}, ${self.config.height/2})`);;
+            .attr('transform', `translate(${self.config.width/2}, ${self.config.height/2})`);
 
         self.pie = d3.pie()
             .value( d => d.value);
@@ -73,7 +73,7 @@ class PieChart {
             .attr("d", self.arc)
             .attr("fill", 'black')
             .attr("stroke", "white")
-            .style("stroke-width", "1px");
+            .style("stroke-width", "2px");
 
         arcs.append("text")
             .attr("transform", d => `translate(${self.arc_label.centroid(d)})`)
