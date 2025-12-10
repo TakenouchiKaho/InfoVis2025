@@ -66,7 +66,8 @@ class LineChart {
 
         self.path = self.chart.append('path')
             .attr('stroke', 'black')
-            .attr('fill', 'none');
+            .attr('fill', 'none')
+            .attr('stroke-width', 2);
     }
 
     update() {
