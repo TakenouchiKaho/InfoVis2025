@@ -7,7 +7,6 @@ d3.csv("https://TakenouchiKaho.github.io/InfoVis2025/W08/data.csv")
             parent: '#drawing_region',
             width: 256,
             height: 256,
-            radius: Math.min( width, height ) / 2
         };
 
         const pie_chart = new PieChart( config, data );
@@ -24,7 +23,6 @@ class PieChart {
             parent: config.parent,
             width: config.width || 256,
             height: config.height || 256,
-            radius: config.radius || Math.min( width, height ) / 2
         }
         this.data = data;
         this.init();
@@ -33,49 +31,25 @@ class PieChart {
     init() {
         let self = this;
 
+        self.radius = Math.min( self.config.width, self.config.height ) / 2;
+
         self.svg = d3.select( self.config.parent )
             .attr('width', self.config.width)
             .attr('height', self.config.height)
-            .append('g')
-            .attr('transform', `translate(${self.config.width/2}, ${self.config.height/2})`);;
 
         self.chart = self.svg.append('g')
-            .attr('transform',
-                `translate(${self.config.margin.left}, ${self.config.margin.top})`);
-
-        self.inner_width = self.config.width - self.config.margin.left - self.config.margin.right;
-        self.inner_height = self.config.height - self.config.margin.top - self.config.margin.bottom;
-
-        self.xscale = d3.scaleLinear()
-            .range( [0, self.inner_width] );
-
-        self.yscale = d3.scaleLinear()
-            .range( [0, self.inner_height] );
-
-        self.xaxis = d3.axisBottom( self.xscale )
-            .ticks(6);
-
-        self.xaxis_group = self.chart.append('g')
-            .attr('transform', `translate(0, ${self.inner_height})`);
+            .attr('transform', `translate(${self.config.width/2}, ${self.config.height/2})`);;
 
         self.pie = d3.pie()
             .value( d => d.value);
 
         self.arc = d3.arc()
             .innerRadius(0)
-            .outerRadius(radius);
+            .outerRadius(self.radius);
     }
 
     update() {
         let self = this;
-
-        const xmin = d3.min( self.data, d => d.x );
-        const xmax = d3.max( self.data, d => d.x );
-        self.xscale.domain( [xmin, xmax] );
-
-        const ymin = d3.min( self.data, d => d.y );
-        const ymax = d3.max( self.data, d => d.y );
-        self.yscale.domain( [ymin, ymax] );
 
         self.render();
     }
@@ -83,14 +57,25 @@ class PieChart {
     render() {
         let self = this;
 
-        self.chart.selectAll("pie")
-            .data( self.pie(self.data) )
-            .enter()
-            .append("path")
+        const pie_data = self.pie(self.data);
+
+        const arcs = self.chart.selectAll(".arc")
+            .data(pie_data)
+            .join("g")
+            .attr("class", "arc");
+
+        arcs.append("path")
             .attr("d", self.arc)
             .attr("fill", 'black')
-            .attr("stroke", 'white')
-            .style('stroke-width', '2px');
+            .attr("stroke", "white")
+            .style("stroke-width", "2px");
+
+        arcs.append("text")
+            .attr("transform", d => `translate(${self.arc_label.centroid(d)})`)
+            .attr("text-anchor", "middle")
+            .attr("fill", "white")
+            .style("font-size", "10px")
+            .text(d => d.data.label || d.data.key || d.data.value);
 
     }
 }
