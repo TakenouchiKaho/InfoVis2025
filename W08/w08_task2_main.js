@@ -63,18 +63,20 @@ class LineChart {
         self.line = d3.line()
             .x( d => self.xscale(d.x) )
             .y( d => self.yscale(d.y) );
+
+        self.path = self.chart.append('path')
+            .attr('stroke', 'black')
+            .attr('fill', 'none');
     }
 
     update() {
         let self = this;
 
-        const xmin = d3.min( self.data, d => d.x );
         const xmax = d3.max( self.data, d => d.x );
-        self.xscale.domain( [xmin, xmax] );
+        self.xscale.domain( [0, xmax] );
 
-        const ymin = d3.min( self.data, d => d.y );
         const ymax = d3.max( self.data, d => d.y );
-        self.yscale.domain( [ymin, ymax] );
+        self.yscale.domain( [0, ymax] );
 
         self.render();
     }
@@ -82,10 +84,8 @@ class LineChart {
     render() {
         let self = this;
 
-        self.chart.append('path')
-            .attr('d', self.line(self.data))
-            .attr('stroke', 'black')
-            .attr('fill', 'none');
+        self.path
+            .attr('d', self.line(self.data));
 
         self.xaxis_group.call( self.xaxis );
         self.yaxis_group.call( self.yaxis );
