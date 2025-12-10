@@ -7,7 +7,7 @@ var data = [
 ]
 
 var width = 256;
-var height = 128;
+var height = 256;
 var radius = Math.min( width, height ) / 2;
 
 var svg = d3.select('#drawing_region')
