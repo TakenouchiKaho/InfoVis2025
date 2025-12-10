@@ -39,7 +39,7 @@ const yaxis = d3.axisLeft( yscale )
     .tickSizeOuter(0);
 
 // Draw the axis
-const xaxis_group = chartappend('g')
+const xaxis_group = chart.append('g')
     .attr('transform', `translate(0, ${inner_height})`)
     .call( xaxis );
 
