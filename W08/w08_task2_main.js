@@ -88,6 +88,6 @@ class LineChart {
             .attr('fill', 'none');
 
         self.xaxis_group.call( self.xaxis );
-        self.yaxis_group.call( self.xaxis );
+        self.yaxis_group.call( self.yaxis );
     }
 }
