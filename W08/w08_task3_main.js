@@ -57,6 +57,13 @@ class ScatterPlot {
 
         self.xaxis_group = self.chart.append('g')
             .attr('transform', `translate(0, ${self.inner_height})`);
+
+        self.pie = d3.pie()
+            .value( d => d.value);
+
+        self.arc = d3.arc()
+            .innerRadius(0)
+            .outerRadius(radius);
     }
 
     update() {
@@ -76,15 +83,14 @@ class ScatterPlot {
     render() {
         let self = this;
 
-        self.chart.selectAll("circle")
-            .data(self.data)
+        self.chart.selectAll("pie")
+            .data( self.pie(self.data) )
             .enter()
-            .append("circle")
-            .attr("cx", d => self.xscale( d.x ))
-            .attr("cy", d => self.yscale( d.y ))
-            .attr("r", d => d.r );
+            .append("path")
+            .attr("d", self.arc)
+            .attr("fill", 'black')
+            .attr("stroke", 'white')
+            .style('stroke-width', '2px');
 
-        self.xaxis_group
-            .call( self.xaxis );
     }
 }

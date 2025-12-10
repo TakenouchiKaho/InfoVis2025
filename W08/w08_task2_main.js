@@ -34,6 +34,7 @@ class LineChart {
         self.config.margin = self.config.margin || {top: 10, right: 10, bottom: 20, left: 60};
 
         self.svg = d3.select( self.config.parent )
+            .append('svg')
             .attr('width', self.config.width)
             .attr('height', self.config.height);
 
@@ -70,7 +71,7 @@ class LineChart {
         let self = this;
 
         self.chart.append('path')
-            .attr('d', line(self.data))
+            .attr('d', self.line(self.data))
             .attr('stroke', 'black')
             .attr('fill', 'none');
     }
