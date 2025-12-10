@@ -48,6 +48,18 @@ class LineChart {
         self.xscale = d3.scaleLinear().range([0, self.inner_width]);
         self.yscale = d3.scaleLinear().range([self.inner_height, 0]);
 
+        self.xaxis = d3.axisBottom( self.xscale )
+            .ticks(5)
+            .tickSizeOuter(0); //Modify
+
+        self.xaxis_group = self.chart.append('g')
+            .attr('transform', `translate(0, ${self.inner_height})`)
+
+        self.yaxis = d3.axisLeft( self.yscale )
+            .tickSizeOuter(0); //Modify
+
+        self.yaxis_group = self.chart.append('g');
+
         self.line = d3.line()
             .x( d => self.xscale(d.x) )
             .y( d => self.yscale(d.y) );
@@ -74,5 +86,8 @@ class LineChart {
             .attr('d', self.line(self.data))
             .attr('stroke', 'black')
             .attr('fill', 'none');
+
+        self.xaxis_group.call( self.xaxis );
+        self.xaxis_group.call( self.xaxis );
     }
 }
