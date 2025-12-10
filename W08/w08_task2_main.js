@@ -56,6 +56,18 @@ class LineChart {
             .attr('stroke', 'black')
             .attr('fill', 'none');
 
+        // Initialize axes
+        self.xaxis = d3.axisBottom( self.xscale )
+            .ticks(5)
+            .tickSizeOuter(0); //Modify
+
+        self.xaxis_group = self.chart.append('g')
+            .attr('transform', `translate(0, ${self.inner_height})`)
+
+        self.yaxis = d3.axisLeft( self.yscale )
+            .tickSizeOuter(0); //Modify
+
+        self.yaxis_group = self.chart.append('g');
     }
 
     update() {
@@ -77,5 +89,11 @@ class LineChart {
 
         self.path
             .attr('d', self.line(self.data));
+
+        self.xaxis_group
+            .call( self.xaxis );
+
+        self.yaxis_group
+            .call( self.yaxis );
     }
 }
