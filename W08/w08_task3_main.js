@@ -34,6 +34,7 @@ class PieChart {
         self.radius = Math.min( self.config.width, self.config.height ) / 2;
 
         self.svg = d3.select( self.config.parent )
+            .append('svg')
             .attr('width', self.config.width)
             .attr('height', self.config.height)
 
@@ -46,10 +47,16 @@ class PieChart {
         self.arc = d3.arc()
             .innerRadius(0)
             .outerRadius(self.radius);
+
+        self.arc_label = d3.arc()
+            .innerRadius(self.radius * 0.7)
+            .outerRadius(self.radius * 0.7);
     }
 
     update() {
         let self = this;
+
+        const pie_data = self.pie(self.data);
 
         self.render();
     }
@@ -57,10 +64,8 @@ class PieChart {
     render() {
         let self = this;
 
-        const pie_data = self.pie(self.data);
-
         const arcs = self.chart.selectAll(".arc")
-            .data(pie_data)
+            .data(self.pie_data)
             .join("g")
             .attr("class", "arc");
 
