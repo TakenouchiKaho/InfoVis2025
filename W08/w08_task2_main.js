@@ -34,7 +34,6 @@ class LineChart {
         self.config.margin = self.config.margin || {top: 10, right: 10, bottom: 20, left: 60};
 
         self.svg = d3.select( self.config.parent )
-            .append('svg')
             .attr('width', self.config.width)
             .attr('height', self.config.height);
 
@@ -51,23 +50,6 @@ class LineChart {
         self.line = d3.line()
             .x( d => self.xscale(d.x) )
             .y( d => self.yscale(d.y) );
-
-        self.path = self.chart.append('path')
-            .attr('stroke', 'black')
-            .attr('fill', 'none');
-
-        // Initialize axes
-        self.xaxis = d3.axisBottom( self.xscale )
-            .ticks(5)
-            .tickSizeOuter(0); //Modify
-
-        self.xaxis_group = self.chart.append('g')
-            .attr('transform', `translate(0, ${self.inner_height})`)
-
-        self.yaxis = d3.axisLeft( self.yscale )
-            .tickSizeOuter(0); //Modify
-
-        self.yaxis_group = self.chart.append('g');
     }
 
     update() {
@@ -87,13 +69,9 @@ class LineChart {
     render() {
         let self = this;
 
-        self.path
-            .attr('d', self.line(self.data));
-
-        self.xaxis_group
-            .call( self.xaxis );
-
-        self.yaxis_group
-            .call( self.yaxis );
+        self.chart.append('path')
+            .attr('d', line(self.data))
+            .attr('stroke', 'black')
+            .attr('fill', 'none');
     }
 }
