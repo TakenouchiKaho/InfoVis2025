@@ -77,7 +77,7 @@ class LineChart {
         self.xscale.domain( [0, xmax] );
 
         const ymax = d3.max( self.data, d => d.y );
-        self.yscale.domain( [0, ymax * 0.1] );
+        self.yscale.domain( [0, ymax * 1.1] );
 
         self.render();
     }
