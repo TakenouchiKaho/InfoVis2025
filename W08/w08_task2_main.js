@@ -6,7 +6,8 @@ d3.csv("https://TakenouchiKaho.github.io/InfoVis2025/W08/w08_task2.csv")
         var config = {
             parent: '#drawing_region',
             width: 256,
-            height: 128
+            height: 128,
+            margin : { top: 10, right: 10, bottom: 20, left: 60 }
         };
 
         const line_chart = new LineChart( config, data );
@@ -23,7 +24,8 @@ class LineChart {
             parent: config.parent,
             width: config.width || 256,
             height: config.height || 128,
-        }
+            margin: config.margin || {top: 10, right: 10, bottom: 20, left: 60}
+        };
         this.data = data;
         this.init();
     }
@@ -31,10 +33,7 @@ class LineChart {
     init() {
         let self = this;
         
-        self.config.margin = self.config.margin || {top: 10, right: 10, bottom: 30, left: 60};
-
         self.svg = d3.select( self.config.parent )
-            .append('svg')
             .attr('width', self.config.width)
             .attr('height', self.config.height);
 
@@ -85,11 +84,10 @@ class LineChart {
     render() {
         let self = this;
 
-        self.path
-            .attr('d', self.line(self.data));
-
-        // デバッグ用: パスデータが正しく生成されているかコンソールに出力
-        console.log("Path Data:", self.line(self.data));
+        self.chart.append("path")
+            .attr("d", self.line(self.data))
+            .attr("fill", "none")
+            .attr("stroke", "black");
 
         self.xaxis_group.call( self.xaxis );
         self.yaxis_group.call( self.yaxis );
