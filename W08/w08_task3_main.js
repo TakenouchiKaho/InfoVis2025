@@ -6,7 +6,7 @@ d3.csv("https://TakenouchiKaho.github.io/InfoVis2025/W08/data.csv")
         var config = {
             parent: '#drawing_region',
             width: 256,
-            height: 500,
+            height: 256,
         };
 
         const pie_chart = new PieChart( config, data );
@@ -22,7 +22,7 @@ class PieChart {
         this.config = {
             parent: config.parent,
             width: config.width || 256,
-            height: config.height || 500,
+            height: config.height || 256,
         }
         this.data = data;
         this.init();
@@ -73,7 +73,7 @@ class PieChart {
             .attr("d", self.arc)
             .attr("fill", 'black')
             .attr("stroke", "white")
-            .style("stroke-width", "2px");
+            .style("stroke-width", "1px");
 
         arcs.append("text")
             .attr("transform", d => `translate(${self.arc_label.centroid(d)})`)
