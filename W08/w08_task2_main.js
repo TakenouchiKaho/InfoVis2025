@@ -85,6 +85,7 @@ class LineChart {
         let self = this;
 
         self.chart.append("path")
+            .datum(self.data)
             .attr("d", self.line(self.data))
             .attr("fill", "none")
             .attr("stroke", "black");
