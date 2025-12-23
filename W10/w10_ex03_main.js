@@ -13,5 +13,5 @@ function update(radius) {
 d3.select('#radius-slider')
     .on('input', function() {
         update(parseInt(this.value));
-        d3.select('#radius-value').txt(this.value);
+        d3.select('#radius-value').text(this.value);
     });
