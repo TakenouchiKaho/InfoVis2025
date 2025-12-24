@@ -122,6 +122,9 @@ class ScatterPlot {
             .on('mouseleave', () => {
                 d3.select('#tooltip')
                     .style('opacity', 0);
+
+                d3.select(e.target)
+                    .attr('fill', self.default_color);
             });
 
         self.xaxis_group
