@@ -26,6 +26,8 @@ class ScatterPlot {
             margin: config.margin || {top:10, right:10, bottom:10, left:10}
         }
         this.data = data;
+        this.default_color = 'black';
+        this.highlight_color = 'red';
         this.init();
     }
 
@@ -85,13 +87,8 @@ class ScatterPlot {
     update() {
         let self = this;
 
-        const xmin = d3.min( self.data, d => d.x );
-        const xmax = d3.max( self.data, d => d.x );
-        self.xscale.domain( [xmin, xmax] );
-
-        const ymin = d3.min( self.data, d => d.y );
-        const ymax = d3.max( self.data, d => d.y );
-        self.yscale.domain( [ymin, ymax] );
+        self.xscale.domain( [0, 100] );
+        self.yscale.domain( [0, 200] );
 
         self.render();
     }
@@ -105,13 +102,16 @@ class ScatterPlot {
             .attr("cx", d => self.xscale( d.x ))
             .attr("cy", d => self.yscale( d.y ))
             .attr("r", d => d.r )
-            .attr('fill', d => d.color || 'steelblue');
+            .attr('fill', self.default_color);
 
         circles
             .on('mouseover', (e, d) => {
                 d3.select('#tooltip')
                     .style('opacity', 1)
                     .html(`<div class="tooltip-label">Position</div>(${d.x}, ${d.y})`);
+
+                d3.select(e.target)
+                    .attr('fill', self.highlight_color);
             })
             .on('mousemove', (e) => {
                 const padding = 10;
