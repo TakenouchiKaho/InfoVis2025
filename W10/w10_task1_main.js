@@ -9,8 +9,23 @@ d3.csv("https://TakenouchiKaho.github.io/InfoVis2025/W08/data.csv")
             height: 128,
             margin: {top:10, right:10, bottom:20, left:60} };
 
-        const bar_chart = new BarChart( config, data );
+        let bar_chart = new BarChart( config, data );
         bar_chart.update();
+
+        d3.select('#reverse')
+        .on('click', d => {
+            bar_chart.reverse();
+        });
+
+        d3.select('#ascend')
+        .on('click', d => {
+            bar_chart.sort(ascend);
+        });
+
+        d3.select('#descend')
+        .on('click', d => {
+            bar_chart.sort(descend);
+        });
     })
     .catch( error => {
         console.log( error );
@@ -76,40 +91,37 @@ class BarChart {
 
     render() {
         let self = this;
-        let padding = 10;
-        let height = 20;
         
         svg.chart.selectAll("rect")
-            .data(self.data)
+            .data(self.data, d => d.label)
             .join("rect")
             .transition().duration(1000)
-            .attr("x", padding)
-            .attr("y", (d,i) => padding + i * (height + padding ))
+            .attr("x", 10)
+            .attr("y", d => self.yscale( d.label ))
             .attr("width", d => self.xscale( d.value ))
-            .attr("height", self.yscale.bandwidth());
+            .attr("height", self.yscale.bandwidth())
+            .attr("fill", "steelblue");
 
         self.xaxis_group
+            .transition().duration(1000)
             .call( self.xaxis );
 
         self.yaxis_group
+            .transition().duration(1000)
             .call( self.yaxis );
     }
+
+    reverse() {
+        this.data.reverse();
+        this.update();
+    }
+
+    sort(order) {
+        if (order == 'ascend') {
+            this.data.sort((a, b) => a.value - b.value);
+        } else if (order == 'descend') {
+            this.data.sort((a, b) => b.value - a.value);
+        }
+        this.update();
+    }
 }
-
-d3.select('#reverse')
-    .on('click', d => {
-        data.reverse();
-        bar_chart.reverse();
-    });
-
-d3.select('#ascend')
-    .on('click', d => {
-        data.reverse();
-        bar_chart.sort(ascend);
-    });
-
-d3.select('#descend')
-    .on('click', d => {
-        data.reverse();
-        bar_chart.sort(descend);
-    });
