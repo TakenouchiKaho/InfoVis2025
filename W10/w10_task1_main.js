@@ -95,7 +95,7 @@ class BarChart {
             .data(self.data, d => d.label)
             .join(
                 enter => enter.append("rect")
-                .attr("x", 10)
+                .attr("x", 0)
                 .attr("y", d => self.yscale( d.label ))
                 .attr("width", 0)
                 .attr("height", self.yscale.bandwidth())
@@ -104,7 +104,7 @@ class BarChart {
             exit => exit.remove()
             )
             .transition().duration(1000)
-            .attr("x", 10)
+            .attr("x", 0)
             .attr("y", d => self.yscale( d.label ))
             .attr("width", d => self.xscale( d.value ))
             .attr("height", self.yscale.bandwidth())
