@@ -93,7 +93,16 @@ class BarChart {
         
         self.chart.selectAll("rect")
             .data(self.data, d => d.label)
-            .join("rect")
+            .join(
+                enter => enter.append("rect")
+                .attr("x", 10)
+                .attr("y", d => self.yscale( d.label ))
+                .attr("width", 0)
+                .attr("height", self.yscale.bandwidth())
+                .attr("fill", "steelblue"),
+            update => update,
+            exit => exit.remove()
+            )
             .transition().duration(1000)
             .attr("x", 10)
             .attr("y", d => self.yscale( d.label ))
