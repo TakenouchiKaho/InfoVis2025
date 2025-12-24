@@ -119,7 +119,7 @@ class ScatterPlot {
                     .style('left', (e.pageX + padding) + 'px')
                     .style('top', (e.pageY + padding) + 'py');
             })
-            .on('mouseleave', () => {
+            .on('mouseleave', (e) => {
                 d3.select('#tooltip')
                     .style('opacity', 0);
 
