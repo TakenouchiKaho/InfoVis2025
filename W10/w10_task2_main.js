@@ -87,8 +87,8 @@ class ScatterPlot {
     update() {
         let self = this;
 
-        self.xscale.domain( [0, 100] );
-        self.yscale.domain( [0, 200] );
+        self.xscale.domain( [0, 200] );
+        self.yscale.domain( [0, 100] );
 
         self.render();
     }
