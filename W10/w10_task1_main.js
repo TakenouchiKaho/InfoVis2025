@@ -19,12 +19,12 @@ d3.csv("https://TakenouchiKaho.github.io/InfoVis2025/W08/data.csv")
 
         d3.select('#ascend')
         .on('click', d => {
-            bar_chart.sort(ascend);
+            bar_chart.sort('ascend');
         });
 
         d3.select('#descend')
         .on('click', d => {
-            bar_chart.sort(descend);
+            bar_chart.sort('descend');
         });
     })
     .catch( error => {
@@ -48,7 +48,6 @@ class BarChart {
         let self = this;
 
         self.svg = d3.select( self.config.parent )
-            .append('svg')
             .attr('width', self.config.width)
             .attr('height', self.config.height);
 
@@ -92,7 +91,7 @@ class BarChart {
     render() {
         let self = this;
         
-        svg.chart.selectAll("rect")
+        self.chart.selectAll("rect")
             .data(self.data, d => d.label)
             .join("rect")
             .transition().duration(1000)
