@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J-Music Popularity Analysis | InfoVis 2025</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Music Popularity Analysis</h1>
+        <p class="subtitle">Exploring Acoustic Features of J-Music (3,323 Songs)</p>
+    </header>
+
+    <main id="dashboard">
+        <section id="left-panel">
+            <div class="card" id="scatter-card">
+                <h2>Energy vs Valence</h2>
+                <div id="scatter-plot"></div>
+                <div class="legend" id="popularity-legend"></div>
+            </div>
+        </section>
+
+        <section id="right-panel">
+            <div class="card" id="stat-card">
+                <h2>Selection Summary</h2>
+                <div id="summary-view">
+                    <p>Select points on the scatter plot to see statistics.</p>
+                </div>
+            </div>
+            <div class="card" id="genre-card">
+                <h2>Top Genres (by Selection)</h2>
+                <div id="genre-chart"></div>
+            </div>
+        </section>
+    </main>
+
+    <div id="tooltip" class="hidden">
+        <p><strong id="song-name"></strong></p>
+        <p id="artist-name"></p>
+        <p id="song-popularity"></p>
+    </div>
+
+    <footer>
+        <p>InfoVis 2025 Final Task | [Name] ([Student ID])</p>
+    </footer>
+
+    <script src="js/ScatterPlot.js"></script>
+    <script src="js/BarChart.js"></script>
+    <script src="js/Summary.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
