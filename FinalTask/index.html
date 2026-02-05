@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>J-Music Popularity Analysis | InfoVis 2025</title>
+    <meta name="description"
+        content="An interactive visualization system exploring the relationship between acoustic features and popularity in J-Music, built with D3.js.">
     <link rel="stylesheet" href="style.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
@@ -20,36 +22,50 @@
     </header>
 
     <main id="dashboard">
-        <section id="left-panel">
-            <div class="card" id="scatter-card">
-                <h2>Energy vs Valence</h2>
-                <div id="scatter-plot"></div>
-                <div class="legend" id="popularity-legend"></div>
-            </div>
-        </section>
-
-        <section id="right-panel">
-            <div class="card" id="stat-card">
-                <h2>Selection Summary</h2>
-                <div id="summary-view">
-                    <p>Select points on the scatter plot to see statistics.</p>
+        <div class="top-row">
+            <section id="left-panel">
+                <div class="card" id="scatter-card">
+                    <h2>Energy vs Valence</h2>
+                    <div id="scatter-plot"></div>
+                    <div class="legend" id="popularity-legend"></div>
                 </div>
-            </div>
+            </section>
+
+            <section id="right-panel">
+                <div class="card" id="stat-card">
+                    <h2>Selection Summary</h2>
+                    <div id="summary-view">
+                        <p>Select points on the scatter plot to see statistics.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="bottom-row">
             <div class="card" id="genre-card">
                 <h2>Top Genres (by Selection)</h2>
                 <div id="genre-chart"></div>
             </div>
-        </section>
+        </div>
     </main>
 
     <div id="tooltip" class="hidden">
         <p><strong id="song-name"></strong></p>
         <p id="artist-name"></p>
         <p id="song-popularity"></p>
+        <div id="spotify-link" style="margin-top:0.5rem; border-top:1px solid #eee; padding-top:0.5rem;"></div>
     </div>
 
     <footer>
-        <p>InfoVis 2025 Final Task | [Name] ([Student ID])</p>
+        <div class="footer-content">
+            <p>InfoVis 2025 Final Task | [Name] ([Student ID])</p>
+            <div class="credits">
+                <span>Data Source: <a href="https://www.kaggle.com/" target="_blank">Kaggle (Spotify Dataset)</a></span>
+                |
+                <span>Technologies: D3.js (v7), HTML5, CSS3</span>
+            </div>
+            <p style="margin-top:0.5rem; opacity:0.6;">&copy; 2025 Music Analysis Project</p>
+        </div>
     </footer>
 
     <script src="js/ScatterPlot.js"></script>

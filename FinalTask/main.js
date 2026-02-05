@@ -36,6 +36,17 @@ d3.csv('japanese_songs_no_lyrics.csv').then(data => {
         summaryView.updateVis(selectedData);
     };
 
+    // Define interaction: Clicking on a dot shows details
+    scatterPlot.onSingleClick = (d) => {
+        summaryView.showTrackDetails(d);
+    };
+
+    // Global helper for SummaryView list items
+    window.triggerSingleSelect = (id) => {
+        const track = rawData.find(d => d.id === id);
+        if (track) summaryView.showTrackDetails(track);
+    };
+
     // Popularity Filter Interaction
     d3.select('#popularity-filter').on('input', function () {
         const minPop = +this.value;
@@ -61,6 +72,11 @@ d3.csv('japanese_songs_no_lyrics.csv').then(data => {
 // Resize handler
 window.addEventListener('resize', () => {
     if (scatterPlot) {
-        // Redraw or update if needed, but for simplicity we keep fixed size for now
+        scatterPlot.config.width = document.querySelector('#scatter-card').clientWidth - 60;
+        scatterPlot.resizeVis();
+    }
+    if (barChart) {
+        barChart.config.width = document.querySelector('#genre-card').clientWidth - 60;
+        barChart.resizeVis();
     }
 });

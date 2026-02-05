@@ -84,4 +84,13 @@ class BarChart {
         vis.xAxisGroup.call(vis.xAxis);
         vis.yAxisGroup.call(vis.yAxis);
     }
+
+    resizeVis() {
+        let vis = this;
+        vis.width = vis.config.width - vis.config.margin.left - vis.config.margin.right;
+        vis.svg.attr('width', vis.config.width);
+        vis.xScale.range([0, vis.width]);
+        vis.xAxis.tickSize(0); // Optional: change tick size
+        vis.updateVis(vis.displayData || vis.data);
+    }
 }

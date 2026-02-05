@@ -20,14 +20,14 @@ This study aims to visualize the relationship between popularity and acoustic fe
 
 ### System Configuration
 The visualization system is built using **HTML5, CSS3, and D3.js (v7)**. It follows a multi-view dashboard design:
-1.  **Scatter Plot**: Maps Valence (X) and Energy (Y). Color encodes Popularity.
+1.  **Scatter Plot**: Maps Valence (X) and Energy (Y). Color encodes Popularity. Extended with crosshairs for coordinate precision.
 2.  **Bar Chart**: Shows frequency distribution of niche genres in the selected sample.
-3.  **Summary View**: Provides mean values of acoustic features for the current selection.
+3.  **Summary/Details View**: Provides mean values of acoustic features for group selections. When a single song is clicked, it fetches live track metadata and artwork using the **iTunes Search API** and provides a high-fidelity interaction point.
 
 ### Interaction
 - **Brushing**: Users can select a region in the scatter plot to filter data.
 - **Linking**: The Bar Chart and Summary View update instantly based on the brushed selection.
-- **Hovering**: Displays metadata (Song name, Artist, Popularity) via custom tooltips in the scatter plot.
+- **Hovering**: Displays metadata via tooltips with an interactive link to Spotify ("Live data") and crosshairs for visual guidance.
 
 ## 3. Result
 ### Data Distribution

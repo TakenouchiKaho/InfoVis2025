@@ -20,7 +20,7 @@ class ScatterPlot {
         vis.svg = d3.select(vis.config.parentElement)
             .append('svg')
             .attr('width', vis.config.width)
-            .attr('height', vis.config.height + 60); // Extra space for legend
+            .attr('height', vis.config.height + 100); // Increased extra space for legend
 
         vis.chart = vis.svg.append('g')
             .attr('transform', `translate(${vis.config.margin.left},${vis.config.margin.top})`);
@@ -76,6 +76,19 @@ class ScatterPlot {
         vis.brushGroup = vis.chart.append('g')
             .attr('class', 'brush');
 
+        // Add crosshairs (extension)
+        vis.crosshairX = vis.chart.append('line')
+            .attr('class', 'crosshair')
+            .attr('y1', 0)
+            .attr('y2', vis.height)
+            .style('display', 'none');
+
+        vis.crosshairY = vis.chart.append('line')
+            .attr('class', 'crosshair')
+            .attr('x1', 0)
+            .attr('x2', vis.width)
+            .style('display', 'none');
+
         vis.drawLegend();
         vis.updateVis();
     }
@@ -86,7 +99,7 @@ class ScatterPlot {
         const legendHeight = 15;
 
         const legend = vis.svg.append('g')
-            .attr('transform', `translate(${vis.config.margin.left + (vis.width - legendWidth) / 2}, ${vis.height + vis.config.margin.top + 60})`);
+            .attr('transform', `translate(${vis.config.margin.left + (vis.width - legendWidth) / 2}, ${vis.height + vis.config.margin.top + 90})`);
 
         const defs = vis.svg.append('defs');
         const linearGradient = defs.append('linearGradient')
@@ -136,22 +149,40 @@ class ScatterPlot {
             .data(vis.displayData, d => d.id)
             .join('circle')
             .attr('class', 'dot')
+            .style('cursor', 'pointer')
             .attr('cx', d => vis.xScale(d.valence))
             .attr('cy', d => vis.yScale(d.energy))
             .attr('r', 4)
             .attr('fill', d => vis.colorScale(d.popularity))
             .on('mouseover', function (event, d) {
                 d3.select(this).classed('highlight', true);
+
+                // Show crosshairs
+                vis.crosshairX.style('display', null).attr('x1', vis.xScale(d.valence)).attr('x2', vis.xScale(d.valence));
+                vis.crosshairY.style('display', null).attr('y1', vis.yScale(d.energy)).attr('y2', vis.yScale(d.energy));
+
                 d3.select('#tooltip')
                     .style('left', (event.pageX + 10) + 'px')
                     .style('top', (event.pageY + 10) + 'px')
                     .classed('hidden', false);
+
                 d3.select('#song-name').text(d.name);
                 d3.select('#artist-name').text(`Artists: ${d.artists.replace(/[\[\]"]/g, '')}`);
                 d3.select('#song-popularity').text(`Popularity: ${d.popularity}`);
+
+                d3.select('#spotify-link').html('<div style="font-size:0.75rem; color:var(--text-secondary); opacity:0.8;">(Click dot for live details)</div>');
+            })
+            .on('click', function (event, d) {
+                vis.onSingleClick(d);
             })
             .on('mouseout', function () {
                 d3.select(this).classed('highlight', false);
+                vis.crosshairX.style('display', 'none');
+                vis.crosshairY.style('display', 'none');
+                // Tooltip stays until next mouseover or if we want it to hide
+                // For links to work, we might want to keep it or use a delay.
+                // But simple hide is standard if it's not interactive.
+                // To make it interactive, we'd need to remove pointer-events:none.
                 d3.select('#tooltip').classed('hidden', true);
             });
 
@@ -172,6 +203,22 @@ class ScatterPlot {
         } else {
             vis.onSelectionChange(vis.displayData);
         }
+    }
+
+    resizeVis() {
+        let vis = this;
+        vis.width = vis.config.width - vis.config.margin.left - vis.config.margin.right;
+        vis.svg.attr('width', vis.config.width);
+        vis.xScale.range([0, vis.width]);
+        vis.xAxis.tickSize(-vis.height);
+        vis.yAxis.tickSize(-vis.width);
+        vis.xAxisGroup.call(vis.xAxis);
+        vis.yAxisGroup.call(vis.yAxis);
+        vis.updateVis();
+    }
+
+    onSingleClick(d) {
+        // Placeholder
     }
 
     onSelectionChange(selectedData) {
