@@ -1,22 +1,22 @@
-# J-Music Visualization System
+# J-Music 楽曲特性・人気度分析システム
 
-Final project for InfoVis 2025.
+InfoVis 2025 最終課題：インタラクティブ・ビジュアライゼーション・システム
 
-## Project Structure
-- `index.html`: Main entry point.
-- `style.css`: Visualization styling.
-- `main.js`: Main logic and data orchestration.
-- `js/`: Component-based D3 classes.
-  - `ScatterPlot.js`
-  - `BarChart.js`
-  - `Summary.js`
-- `japanese_songs_no_lyrics.csv`: Dataset.
+## プロジェクト構成
+- `index.html`: システムのメインエントリポイント
+- `style.css`: プレミアム・デザイン（ダークモード、グラスモルフィズム）
+- `main.js`: データの読み込み、各コンポーネントの連携制御
+- `js/`: D3.jsを用いた各視覚化コンポーネント
+  - `ScatterPlot.js`: 散布図（Energy vs Valence）
+  - `BarChart.js`: ジャンル分布（棒グラフ）
+  - `Summary.js`: 統計要約・選択リスト
+- `japanese_songs_no_lyrics.csv`: 日本の楽曲3,323件のデータセット
 
-## Features
-- **Interactive Scatter Plot**: Explore 3,323 songs by Energy and Valence.
-- **Brushing & Linking**: Update genre distribution and stats by selecting points.
-- **Dynamic Tooltips**: View metadata on hover.
+## 主な機能
+- **インタラクティブな散布図**: 楽曲の「エネルギー（Energy）」と「明るさ（Valence）」の分布を可視化。人気度を色で表現。
+- **ブラシ（範囲選択）と連動（Linking）**: 散布図上で特定の範囲を選択すると、その領域に含まれる楽曲のジャンル構成と統計情報が即座に更新されます。
+- **動的ツールチップ**: 各データポイントにマウスを乗せると、曲名・アーティスト・人気度を確認できます。
 
-## Credits
-- Data: Publicly available Japanese song dataset.
-- Tools: D3.js, HTML/CSS.
+## クレジット
+- **データ**: 日本の楽曲データセット
+- **使用技術**: D3.js (v7), HTML5/CSS3 (Vanilla)

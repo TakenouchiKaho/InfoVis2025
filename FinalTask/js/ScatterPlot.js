@@ -7,6 +7,7 @@ class ScatterPlot {
             margin: config.margin || { top: 20, right: 20, bottom: 50, left: 50 }
         };
         this.data = data;
+        this.displayData = data;
         this.initVis();
     }
 
@@ -19,7 +20,7 @@ class ScatterPlot {
         vis.svg = d3.select(vis.config.parentElement)
             .append('svg')
             .attr('width', vis.config.width)
-            .attr('height', vis.config.height);
+            .attr('height', vis.config.height + 60); // Extra space for legend
 
         vis.chart = vis.svg.append('g')
             .attr('transform', `translate(${vis.config.margin.left},${vis.config.margin.top})`);
@@ -75,7 +76,54 @@ class ScatterPlot {
         vis.brushGroup = vis.chart.append('g')
             .attr('class', 'brush');
 
+        vis.drawLegend();
         vis.updateVis();
+    }
+
+    drawLegend() {
+        let vis = this;
+        const legendWidth = 300;
+        const legendHeight = 15;
+
+        const legend = vis.svg.append('g')
+            .attr('transform', `translate(${vis.config.margin.left + (vis.width - legendWidth) / 2}, ${vis.height + vis.config.margin.top + 60})`);
+
+        const defs = vis.svg.append('defs');
+        const linearGradient = defs.append('linearGradient')
+            .attr('id', 'pop-gradient');
+
+        linearGradient.selectAll('stop')
+            .data(vis.colorScale.ticks().map((t, i, n) => ({ offset: `${100 * i / n.length}%`, color: vis.colorScale(t) })))
+            .enter().append('stop')
+            .attr('offset', d => d.offset)
+            .attr('stop-color', d => d.color);
+
+        legend.append('rect')
+            .attr('width', legendWidth)
+            .attr('height', legendHeight)
+            .style('fill', 'url(#pop-gradient)');
+
+        const legendScale = d3.scaleLinear()
+            .domain([0, 80])
+            .range([0, legendWidth]);
+
+        const legendAxis = d3.axisBottom(legendScale)
+            .ticks(5)
+            .tickSize(0)
+            .tickPadding(5);
+
+        legend.append('g')
+            .attr('transform', `translate(0, ${legendHeight})`)
+            .call(legendAxis)
+            .select('.domain').remove();
+
+        legend.append('text')
+            .attr('x', legendWidth / 2)
+            .attr('y', -5)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '12px')
+            .style('fill', '#64748b')
+            .text('Popularity');
     }
 
     updateVis() {
@@ -85,7 +133,7 @@ class ScatterPlot {
         vis.yAxisGroup.call(vis.yAxis);
 
         vis.circles = vis.chart.selectAll('.dot')
-            .data(vis.data)
+            .data(vis.displayData, d => d.id)
             .join('circle')
             .attr('class', 'dot')
             .attr('cx', d => vis.xScale(d.valence))
@@ -116,17 +164,17 @@ class ScatterPlot {
 
         if (selection) {
             const [[x0, y0], [x1, y1]] = selection;
-            const selectedData = vis.data.filter(d => (
+            const selectedData = vis.displayData.filter(d => (
                 vis.xScale(d.valence) >= x0 && vis.xScale(d.valence) <= x1 &&
                 vis.yScale(d.energy) >= y0 && vis.yScale(d.energy) <= y1
             ));
             vis.onSelectionChange(selectedData);
         } else {
-            vis.onSelectionChange(vis.data);
+            vis.onSelectionChange(vis.displayData);
         }
     }
 
     onSelectionChange(selectedData) {
-        // Placeholder, will be overridden in main.js
+        // Placeholder
     }
 }

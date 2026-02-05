@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,10 +8,15 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
+
 <body>
     <header>
         <h1>Music Popularity Analysis</h1>
         <p class="subtitle">Exploring Acoustic Features of J-Music (3,323 Songs)</p>
+        <div id="filter-container">
+            <label for="popularity-filter">Minimum Popularity: <span id="pop-value">0</span></label>
+            <input type="range" id="popularity-filter" min="0" max="80" value="0">
+        </div>
     </header>
 
     <main id="dashboard">
@@ -51,4 +57,5 @@
     <script src="js/Summary.js"></script>
     <script src="main.js"></script>
 </body>
+
 </html>

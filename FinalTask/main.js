@@ -1,4 +1,5 @@
 let scatterPlot, barChart, summaryView;
+let rawData;
 
 // Load CSV data
 d3.csv('japanese_songs_no_lyrics.csv').then(data => {
@@ -8,6 +9,7 @@ d3.csv('japanese_songs_no_lyrics.csv').then(data => {
         d.valence = +d.valence;
         d.popularity = +d.popularity;
     });
+    rawData = data;
 
     // Initialize View 1: Scatter Plot
     scatterPlot = new ScatterPlot({
@@ -33,6 +35,23 @@ d3.csv('japanese_songs_no_lyrics.csv').then(data => {
         barChart.updateVis(selectedData);
         summaryView.updateVis(selectedData);
     };
+
+    // Popularity Filter Interaction
+    d3.select('#popularity-filter').on('input', function () {
+        const minPop = +this.value;
+        d3.select('#pop-value').text(minPop);
+
+        // Filter data
+        const filteredData = rawData.filter(d => d.popularity >= minPop);
+
+        // Update Scatter Plot
+        scatterPlot.displayData = filteredData;
+        scatterPlot.updateVis();
+
+        // Reset selection when filtering
+        barChart.updateVis(filteredData);
+        summaryView.updateVis(filteredData);
+    });
 
     console.log('Data loaded and visualization initialized.');
 }).catch(error => {
