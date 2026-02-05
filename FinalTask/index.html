@@ -22,31 +22,26 @@
     </header>
 
     <main id="dashboard">
-        <div class="top-row">
-            <section id="left-panel">
-                <div class="card" id="scatter-card">
-                    <h2>Energy vs Valence</h2>
-                    <div id="scatter-plot"></div>
-                    <div class="legend" id="popularity-legend"></div>
-                </div>
-            </section>
+        <section id="left-panel">
+            <div class="card" id="scatter-card">
+                <h2>Energy vs Valence</h2>
+                <div id="scatter-plot"></div>
+                <div class="legend" id="popularity-legend"></div>
+            </div>
+        </section>
 
-            <section id="right-panel">
-                <div class="card" id="stat-card">
-                    <h2>Selection Summary</h2>
-                    <div id="summary-view">
-                        <p>Select points on the scatter plot to see statistics.</p>
-                    </div>
+        <section id="right-panel">
+            <div class="card" id="stat-card">
+                <h2>Selection Summary</h2>
+                <div id="summary-view">
+                    <p>Select points on the scatter plot to see statistics.</p>
                 </div>
-            </section>
-        </div>
-
-        <div class="bottom-row">
+            </div>
             <div class="card" id="genre-card">
                 <h2>Top Genres (by Selection)</h2>
                 <div id="genre-chart"></div>
             </div>
-        </div>
+        </section>
     </main>
 
     <div id="tooltip" class="hidden">
